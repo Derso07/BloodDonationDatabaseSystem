@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BloodDonationDatabase.Application\BloodDonationDatabase.Application.csproj" />
+    <ProjectReference Include="..\BloodDonationDatabase.Infrastructure\BloodDonationDatabase.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
