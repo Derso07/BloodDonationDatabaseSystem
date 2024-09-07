@@ -5,6 +5,7 @@ namespace BloodDonationDatabase.Core.Entities
     public class Donor : BaseEntity
     {
         public Donor(string fullName, string email, DateTime bornAt, Gender gender, double weight, BloodType bloodType, RhFactor rhFactor, int adressId)
+            : base()
         {
             FullName = fullName;
             Email = email;
@@ -28,5 +29,15 @@ namespace BloodDonationDatabase.Core.Entities
         public int AdressId { get; private set; }
         public Adress Adress { get;  set; }
         public List<Donation> Donations { get; set; }
+
+        public void Update(string fullName, string email, Gender gender, double weight, BloodType bloodType, RhFactor rhFactor)
+        {
+            FullName = fullName;
+            Email= email;
+            Gender = gender;
+            Weight = weight;
+            BloodType = bloodType;
+            RhFactor = rhFactor;
+        }
     }
 }

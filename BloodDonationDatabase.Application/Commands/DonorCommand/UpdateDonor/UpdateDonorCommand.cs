@@ -3,10 +3,11 @@ using BloodDonationDatabase.Core.Entities;
 using BloodDonationDatabase.Core.Enum;
 using MediatR;
 
-namespace BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor
+namespace BloodDonationDatabase.Application.Commands.DonorCommand.UpdateDonor
 {
-    public class InsertDonorCommand : IRequest<ResultViewModel<int>>
+    public class UpdateDonorCommand : IRequest<ResultViewModel>
     {
+        public int IdDonor { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public DateTime BornAt { get; set; }
@@ -15,10 +16,6 @@ namespace BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor
         public BloodType BloodType { get; set; }
         public RhFactor RhFactor { get; set; }
         public int AdressId { get; set; }
-        public List<Donation> Donations { get; set; }
-
-        public Donor ToEntity()
-            => new(FullName, Email, BornAt, Gender, Weight, BloodType, RhFactor, AdressId);
-
+        public Adress Adress { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace BloodDonationDatabase.Application.Model
 {
-    public class ResultModel
+    public class ResultViewModel
     {
-        public ResultModel(bool isSuccess = true, string message = "")
+        public ResultViewModel(bool isSuccess = true, string message = "")
         {
             IsSuccess = isSuccess;
             Message = message;
@@ -11,16 +11,16 @@
         public bool IsSuccess { get; private set; }
         public string Message { get; private set; }
 
-        public static ResultModel Success()
+        public static ResultViewModel Success()
             => new();
 
-        public static ResultModel Error(string message)
+        public static ResultViewModel Error(string message)
             => new(false, message);
     }
 
-    public class ResultModel<T> : ResultModel
+    public class ResultViewModel<T> : ResultViewModel
     {
-        public ResultModel(T? data, bool isSuccess = true, string message = "")
+        public ResultViewModel(T? data, bool isSuccess = true, string message = "")
             : base(isSuccess, message)
         {
             Data = data;
@@ -28,10 +28,10 @@
 
         public T? Data { get; private set; }
 
-        public static ResultModel<T> Success(T data)
+        public static ResultViewModel<T> Success(T data)
             => new(data);
 
-        public static ResultModel<T> Error(string message)
+        public static ResultViewModel<T> Error(string message)
             => new(default, false, message);
     }
 }

@@ -1,14 +1,26 @@
 ﻿using BloodDonationDatabase.Application.Model;
+using BloodDonationDatabase.Core.Repository;
 using MediatR;
 
 namespace BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor
 {
-    public class InsertDonorHandler : IRequestHandler<InsertDonorCommand, ResultModel>
+    public class InsertDonorHandler : IRequestHandler<InsertDonorCommand, ResultViewModel<int>>
     {
-        public async Task<ResultModel> Handle(InsertDonorCommand request, CancellationToken cancellationToken)
+        public InsertDonorHandler(IDonorRepository repository)
         {
+            _repository = repository;
+        }
 
-            return ResultModel.Success();
+        private readonly IDonorRepository _repository;
+
+        
+        public async Task<ResultViewModel<int>> Handle(InsertDonorCommand request, CancellationToken cancellationToken)
+        {
+            var donor = request.ToEntity();
+
+            await _repository.Insert(donor);
+
+            return ResultViewModel<int>.Success(donor.Id);
         }
     }
 }

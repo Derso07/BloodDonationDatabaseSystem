@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BloodDonationDatabase.Core\BloodDonationDatabase.Core.csproj" />
   </ItemGroup>
 
