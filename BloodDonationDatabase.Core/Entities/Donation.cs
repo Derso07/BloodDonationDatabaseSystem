@@ -13,5 +13,12 @@
         public double QuantityML { get; private set; }
         public int DonorId { get; private set; }
         public Donor Donor { get; private set; }
+
+        public void Update(DateTime donationAt, double quantityMl, int donorId)
+        {
+            DonationAt = donationAt;
+            QuantityML = quantityMl;
+            DonorId = donorId;
+        }
     }
 }
