@@ -20,7 +20,6 @@ namespace BloodDonationDatabase.Application.Commands.DonorCommand.DeleteDonor
             if (donor is null) return ResultViewModel.Error("Doador não existe");
 
             donor.SetAsDeleted();
-
             await _repository.Update(donor);
 
             return ResultViewModel.Success();

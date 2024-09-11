@@ -15,5 +15,12 @@ namespace BloodDonationDatabase.Core.Entities
         public RhFactor RhFactor { get; set; }
         public double QuantityML { get; private set; }
 
+        public void Update(BloodType bloodType, RhFactor rhFactor, double quantityML)
+        {
+            BloodType = bloodType;
+            RhFactor = rhFactor;
+            QuantityML = quantityML;
+        }
+
     }
 }

@@ -22,6 +22,7 @@ namespace BloodDonationDatabase.Application.Commands.DonationCommand.DeleteDonat
             }
 
             donation.SetAsDeleted();
+            await _repository.Update(donation);
             return ResultViewModel.Success();
         }
     }
