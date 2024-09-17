@@ -1,4 +1,7 @@
-﻿using BloodDonationDatabase.Infrastructure.Context;
+﻿using BloodDonationDatabase.Core.Repositories;
+using BloodDonationDatabase.Core.Repository;
+using BloodDonationDatabase.Infrastructure.Context;
+using BloodDonationDatabase.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,8 +20,14 @@ namespace BloodDonationDatabase.Infrastructure
         private static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("LocalhostConnection");
+
             services.AddDbContext<BloodDonationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            services.AddScoped<IBloodStockRespository, BloodStockRepository>();
+            services.AddScoped<ICepRepository, CepRepository>();
+            services.AddScoped<IDonationRepository, DonationRepository>();
+            services.AddScoped<IDonorRepository, DonorRepository>();
 
             return services;
         }

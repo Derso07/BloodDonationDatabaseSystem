@@ -16,7 +16,7 @@ namespace BloodDonationDatabase.Application.Queries.DonationsQueries.GetAllDonat
         public async Task<ResultViewModel<List<DonationViewModel>>> Handle(GetAllDonationCommand request, CancellationToken cancellationToken)
         {
             var donations = await _repository.GetAll();
-            var model = donations.Select(DonationViewModel.ToEntity).ToList();
+            var model = donations.Select(DonationViewModel.FromEntity).ToList();
 
             return ResultViewModel<List<DonationViewModel>>.Success(model);
         }
