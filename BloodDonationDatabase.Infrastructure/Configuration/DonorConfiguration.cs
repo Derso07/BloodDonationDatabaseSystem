@@ -38,8 +38,9 @@ namespace BloodDonationDatabase.Infrastructure.Configuration
                .IsRequired();
 
             builder.HasOne(d => d.Adress)
-                .WithOne(a => a.Donor)
-                .HasForeignKey<Donor>(d => d.AdressId);
+                 .WithOne(a => a.Donor)
+                 .HasForeignKey<Donor>(d => d.AdressId)
+                 .IsRequired(false);
         }
     }
 }

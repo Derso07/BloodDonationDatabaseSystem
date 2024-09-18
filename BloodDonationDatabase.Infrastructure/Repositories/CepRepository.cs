@@ -1,4 +1,5 @@
-﻿using BloodDonationDatabase.Core.Entities;
+﻿using BloodDonationDatabase.Application.Model;
+using BloodDonationDatabase.Core.Entities;
 using BloodDonationDatabase.Core.Repositories;
 using System.Text.Json;
 
@@ -11,6 +12,7 @@ namespace BloodDonationDatabase.Infrastructure.Repositories
         public CepRepository(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri("https://viacep.com.br");
         }
 
         public async Task<Adress?> CheckAddress(string cep)
@@ -20,7 +22,11 @@ namespace BloodDonationDatabase.Infrastructure.Repositories
             if (response.IsSuccessStatusCode)
             {
                 var jsonResult = await response.Content.ReadAsStringAsync();
-                var adress = JsonSerializer.Deserialize<Adress>(jsonResult);
+                var adressItem = JsonSerializer.Deserialize<AdressItemViewModel>(jsonResult);
+                var zipCodeWithout = adressItem.ZipCode.Replace("-","");
+                adressItem.ZipCode = zipCodeWithout;
+                var adress = adressItem.ToEntity();
+
                 return adress;
             }
             return null;

@@ -1,4 +1,5 @@
 ﻿using BloodDonationDatabase.Core.Entities;
+using System.Text.Json.Serialization;
 
 namespace BloodDonationDatabase.Application.Model
 {
@@ -11,11 +12,10 @@ namespace BloodDonationDatabase.Application.Model
             State = state;
             ZipCode = zipCode;
         }
-
-        public string Street { get; private set; }
-        public string City { get; private set; }
-        public string State { get; private set; }
-        public int ZipCode { get; private set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public int ZipCode { get; set; }
 
         public static AdressViewModel FromEntity(Adress adress)
             => new(adress.Street,adress.City,adress.State,adress.ZipCode);

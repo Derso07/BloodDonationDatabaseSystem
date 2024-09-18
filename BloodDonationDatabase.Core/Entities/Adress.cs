@@ -2,13 +2,22 @@
 {
     public class Adress : BaseEntity
     {
-        public Adress(string street, string city, string state, int zipCode, int donorId, Donor donor)
+        public Adress() { }
+
+        public Adress(string street, string city, string state, int zipCode)
         {
             Street = street;
             City = city;
             State = state;
             ZipCode = zipCode;
-            DonorId = donorId;
+        }
+
+        public Adress(string street, string city, string state, int zipCode, Donor donor)
+        {
+            Street = street;
+            City = city;
+            State = state;
+            ZipCode = zipCode;
             Donor = donor;
         }
 
@@ -16,7 +25,6 @@
         public string City { get; private set; }
         public string State { get; private set; }
         public int ZipCode { get; private set; }
-        public int DonorId { get; private set; }
         public Donor Donor { get; private set; }
     }
 }

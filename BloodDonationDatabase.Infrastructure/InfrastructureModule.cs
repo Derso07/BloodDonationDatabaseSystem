@@ -24,8 +24,8 @@ namespace BloodDonationDatabase.Infrastructure
             services.AddDbContext<BloodDonationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            services.AddHttpClient<ICepRepository, CepRepository>();
             services.AddScoped<IBloodStockRespository, BloodStockRepository>();
-            services.AddScoped<ICepRepository, CepRepository>();
             services.AddScoped<IDonationRepository, DonationRepository>();
             services.AddScoped<IDonorRepository, DonorRepository>();
 

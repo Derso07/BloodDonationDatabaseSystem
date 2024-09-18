@@ -9,14 +9,14 @@ namespace BloodDonationDatabase.API.Controller
     [Route("api/v1/[controller]")]
     public class AdressController : ControllerBase
     {
+        private readonly IMediator _mediator;
         public AdressController(IMediator mediator)
         {
-            mediator = _mediator;
+            _mediator = mediator;
         }
-        private readonly IMediator _mediator;
 
-        [HttpGet("checkAdress/{cep}")]
-        public async Task<IActionResult> CheckAdress(string cep)
+        [HttpGet("checkadress/{cep}")]
+        public async Task<IActionResult> CheckAdress([FromRoute]string cep)
         {
             var query = new GetAdressByCepQuery(cep);
 
@@ -29,6 +29,5 @@ namespace BloodDonationDatabase.API.Controller
 
             return Ok(result);
         }
-
     }
 }
