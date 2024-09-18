@@ -3,9 +3,9 @@ using MediatR;
 
 namespace BloodDonationDatabase.Application.Queries.DonorQueries.GetDonorById
 {
-    public class GetDonorByIdCommand : IRequest<ResultViewModel<DonorViewModel>>
+    public class GetDonorByIdQuery : IRequest<ResultViewModel<DonorViewModel>>
     {
-        public GetDonorByIdCommand(int id)
+        public GetDonorByIdQuery(int id)
         {
             Id = id;
         }

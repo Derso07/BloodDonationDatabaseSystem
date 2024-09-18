@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BloodDonationDatabase.Application.Queries.DonorQueries.GetDonorById
 {
-    public class GetDonorByIdHandler : IRequestHandler<GetDonorByIdCommand, ResultViewModel<DonorViewModel>>
+    public class GetDonorByIdHandler : IRequestHandler<GetDonorByIdQuery, ResultViewModel<DonorViewModel>>
     {
         public GetDonorByIdHandler(IDonorRepository repository)
         {
@@ -13,7 +13,7 @@ namespace BloodDonationDatabase.Application.Queries.DonorQueries.GetDonorById
 
         private readonly IDonorRepository _repository;
 
-        public async Task<ResultViewModel<DonorViewModel>> Handle(GetDonorByIdCommand request, CancellationToken cancellationToken)
+        public async Task<ResultViewModel<DonorViewModel>> Handle(GetDonorByIdQuery request, CancellationToken cancellationToken)
         {
             var donor = await _repository.GetById(request.Id);
 

@@ -5,5 +5,6 @@ namespace BloodDonationDatabase.Core.Repositories
     public interface ICepRepository
     {
         Task<Adress?> CheckAddress(string cep);
+        Task Insert(Adress adress);
     }
 }
