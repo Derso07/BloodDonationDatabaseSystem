@@ -21,6 +21,14 @@ namespace BloodDonationDatabase.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Donation?> GetByDonorId(int donorId)
+        {
+            return await _context.Donations
+                .Where(d => d.DonorId == donorId &&
+                !d.IsDeleted)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<Donation?> GetById(int id)
         {
             return await _context.Donations

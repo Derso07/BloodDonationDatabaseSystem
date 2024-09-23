@@ -39,5 +39,14 @@ namespace BloodDonationDatabase.Core.Entities
             BloodType = bloodType;
             RhFactor = rhFactor;
         }
+
+        public bool CheckWeight()
+        {
+            if (Weight < 50)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor
 {
-    public class InsertDonorCommand : IRequest<ResultViewModel<int>>
+    public class InsertDonorAdressCommand : IRequest<ResultViewModel<int>>
     {
         public string FullName { get; set; }
         public string Email { get; set; }

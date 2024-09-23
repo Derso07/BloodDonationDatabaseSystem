@@ -8,5 +8,6 @@ namespace BloodDonationDatabase.Core.Repositories
         Task Update(Donation donation);
         Task<Donation?> GetById(int id);
         Task<List<Donation?>> GetAll();
+        Task<Donation?> GetByDonorId(int donorId);
     }
 }

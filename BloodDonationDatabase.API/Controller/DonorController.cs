@@ -19,7 +19,7 @@ namespace BloodDonationDatabase.API.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(InsertDonorCommand command)
+        public async Task<IActionResult> Create(InsertDonorAdressCommand command)
         {
             var result = await _mediator.Send(command);
 

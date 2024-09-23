@@ -5,9 +5,9 @@ using MediatR;
 
 namespace BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor
 {
-    public class InsertDonorHandler : IRequestHandler<InsertDonorCommand, ResultViewModel<int>>
+    public class InsertDonorAdressHandler : IRequestHandler<InsertDonorAdressCommand, ResultViewModel<int>>
     {
-        public InsertDonorHandler(IDonorRepository repository, ICepRepository cepRepository)
+        public InsertDonorAdressHandler(IDonorRepository repository, ICepRepository cepRepository)
         {
             _repository = repository;
             _cepRepository = cepRepository;
@@ -17,7 +17,7 @@ namespace BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor
         private readonly ICepRepository _cepRepository;
 
         
-        public async Task<ResultViewModel<int>> Handle(InsertDonorCommand request, CancellationToken cancellationToken)
+        public async Task<ResultViewModel<int>> Handle(InsertDonorAdressCommand request, CancellationToken cancellationToken)
         {
             var donor = request.ToEntity();
 

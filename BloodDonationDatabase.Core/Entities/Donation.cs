@@ -20,5 +20,50 @@
             QuantityML = quantityMl;
             DonorId = donorId;
         }
+
+        public bool CheckAge()
+        {
+            var currentDate = DateTime.UtcNow;
+            var bornAt = Donor.BornAt;
+            var age = currentDate.Year - bornAt.Year;
+
+            if (age > 18) return true;
+            else if (age == 18)
+            {
+                if (bornAt.Month < currentDate.Month)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool WomenDonation()
+        {
+            DateTime currentDate = DateTime.UtcNow;
+            TimeSpan difference = currentDate - DonationAt;
+
+            return difference.TotalDays >= 90;
+        }
+
+        public bool MenDonation()
+        {
+            DateTime currentDate = DateTime.UtcNow;
+            TimeSpan difference = currentDate - DonationAt;
+
+            return difference.TotalDays >= 60;
+        }
+
+        public bool CheckQuantityMlDonation()
+        {
+            return QuantityML > 420 && QuantityML < 470;
+        }
     }
 }
