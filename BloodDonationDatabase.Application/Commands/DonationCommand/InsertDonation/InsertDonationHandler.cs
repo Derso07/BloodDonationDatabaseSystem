@@ -7,14 +7,18 @@ namespace BloodDonationDatabase.Application.Commands.DonationCommand.InsertDonat
 {
     public class InsertDonationHandler : IRequestHandler<InsertDonationCommand, ResultViewModel<int>>
     {
-        public InsertDonationHandler(IDonationRepository donationRepository, IDonorRepository donorRepository)
+        public InsertDonationHandler(IDonationRepository donationRepository, 
+            IDonorRepository donorRepository, 
+            IBloodStockRespository bloodStockRespository)
         {
             _donationRepository = donationRepository;
             _donorRepository = donorRepository;
+            _bloodStockRespository = bloodStockRespository;
         }
 
         private readonly IDonationRepository _donationRepository;
         private readonly IDonorRepository _donorRepository;
+        private readonly IBloodStockRespository _bloodStockRespository;
         public async Task<ResultViewModel<int>> Handle(InsertDonationCommand request, CancellationToken cancellationToken)
         {
             var donation = request.ToEntity();
@@ -43,6 +47,7 @@ namespace BloodDonationDatabase.Application.Commands.DonationCommand.InsertDonat
             }
 
             await _donationRepository.Insert(donation);
+            await _bloodStockRespository.UpdateByType(donor.BloodType, donor.RhFactor, donation.QuantityML);
 
             return ResultViewModel<int>.Success(donation.Id);
         }

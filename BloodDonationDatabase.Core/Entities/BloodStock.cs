@@ -11,8 +11,8 @@ namespace BloodDonationDatabase.Core.Entities
             QuantityML = quantityML;
         }
 
-        public BloodType BloodType { get; set; }
-        public RhFactor RhFactor { get; set; }
+        public BloodType BloodType { get; private set; }
+        public RhFactor RhFactor { get; private set; }
         public double QuantityML { get; private set; }
 
         public void Update(BloodType bloodType, RhFactor rhFactor, double quantityML)
@@ -20,6 +20,11 @@ namespace BloodDonationDatabase.Core.Entities
             BloodType = bloodType;
             RhFactor = rhFactor;
             QuantityML = quantityML;
+        }
+
+        public void UpdateQuantityByType(double quantityMl)
+        {
+            QuantityML += quantityMl;
         }
 
     }

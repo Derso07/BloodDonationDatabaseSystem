@@ -1,4 +1,5 @@
 ﻿using BloodDonationDatabase.Core.Entities;
+using BloodDonationDatabase.Core.Enum;
 using BloodDonationDatabase.Core.Repositories;
 using BloodDonationDatabase.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,26 @@ namespace BloodDonationDatabase.Infrastructure.Repositories
         {
             _context.Update(bloodStock);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateByType(BloodType bloodType, RhFactor rhFactor, double quantityML)
+        {
+            var bloodStock = await _context.BloodStocks
+                .Where(b => b.BloodType == bloodType)
+                .Where(b => b.RhFactor == rhFactor)
+                .FirstOrDefaultAsync();
+
+            if (bloodStock is not null)
+            {
+                bloodStock.UpdateQuantityByType(quantityML);
+                await Update(bloodStock);
+            }
+            else
+            {
+                var newBloodStock = new BloodStock(bloodType, rhFactor, quantityML);
+                await Insert(newBloodStock);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
