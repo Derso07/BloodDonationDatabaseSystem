@@ -27,7 +27,7 @@ namespace BloodDonationDatabase.API.Controller
             {
                 return BadRequest(result.Message);
             }
-            return CreatedAtAction(nameof(GetById),new { result.Data }, command);
+            return CreatedAtAction(nameof(GetById),new { id = result.Data }, command);
         }
 
         [HttpGet("{id}")]

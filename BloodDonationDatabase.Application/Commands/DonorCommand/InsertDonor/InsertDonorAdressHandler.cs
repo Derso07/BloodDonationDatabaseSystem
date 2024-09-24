@@ -19,15 +19,16 @@ namespace BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor
         
         public async Task<ResultViewModel<int>> Handle(InsertDonorAdressCommand request, CancellationToken cancellationToken)
         {
-            var donor = request.ToEntity();
+            
 
             var adress = await _cepRepository.CheckAddress(request.ZipCode);
             if (adress is null)
             {
                 return ResultViewModel<int>.Error("Endereço Incorreto! CEP não encontrado");
             }
-            
             await _cepRepository.Insert(adress);
+            request.AdressId = adress.Id;
+            var donor = request.ToEntity();
             await _repository.Insert(donor);
 
             return ResultViewModel<int>.Success(donor.Id);

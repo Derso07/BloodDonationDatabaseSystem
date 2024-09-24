@@ -15,7 +15,6 @@ namespace BloodDonationDatabase.Application.Commands.DonorCommand.UpdateDonor
         public double Weight { get; set; }
         public BloodType BloodType { get; set; }
         public RhFactor RhFactor { get; set; }
-        public int AdressId { get; set; }
-        public Adress Adress { get; set; }
+
     }
 }

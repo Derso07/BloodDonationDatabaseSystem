@@ -16,8 +16,6 @@ namespace BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor
         public RhFactor RhFactor { get; set; }
         public string ZipCode { get; set; }
         public int AdressId { get; set; }
-        public List<Donation> Donations { get; set; }
-
         public Donor ToEntity()
             => new(FullName, Email, BornAt, Gender, Weight, BloodType, RhFactor, AdressId);
 
