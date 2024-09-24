@@ -6,10 +6,9 @@ namespace BloodDonationDatabase.Application.Commands.DonationCommand.InsertDonat
 {
     public class InsertDonationCommand : IRequest<ResultViewModel<int>>
     {
-        public int Id { get; set; }
-        public DateTime DonationAt { get; private set; }
-        public double QuantityML { get; private set; }
-        public int DonorId { get; private set; }
+        public DateTime DonationAt { get; set; }
+        public double QuantityML { get; set; }
+        public int DonorId { get; set; }
 
         public Donation ToEntity()
             => new(DonationAt, QuantityML, DonorId);

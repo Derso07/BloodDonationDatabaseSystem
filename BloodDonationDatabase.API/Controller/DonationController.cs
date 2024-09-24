@@ -38,7 +38,7 @@ namespace BloodDonationDatabase.API.Controller
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(InsertDonationCommand command)
+        public async Task<IActionResult> Create(InsertDonationCommand command)
         {
             var result = await _mediator.Send(command);
             if (!result.IsSuccess) 
@@ -46,7 +46,7 @@ namespace BloodDonationDatabase.API.Controller
                 return BadRequest(result.Message);
             }
 
-            return CreatedAtAction(nameof(GetById),new { result.Data},command);
+            return CreatedAtAction(nameof(GetById),new { id = result.Data},command);
         }
 
         [HttpPut("{id}")]

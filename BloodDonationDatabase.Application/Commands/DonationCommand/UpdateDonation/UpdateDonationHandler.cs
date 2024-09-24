@@ -22,6 +22,7 @@ namespace BloodDonationDatabase.Application.Commands.DonationCommand.UpdateDonat
             }
 
             donation.Update(request.DonationAt,request.QuantityML,request.DonorId);
+            await _repository.Update(donation);
             return ResultViewModel.Success();
         }
     }

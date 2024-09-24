@@ -21,16 +21,17 @@ namespace BloodDonationDatabase.Application.Commands.DonationCommand.InsertDonat
             var donor = await _donorRepository.GetById(donation.DonorId);
             var donationByDonor = await _donationRepository.GetByDonorId(donor.Id);
 
+            if (!donation.CheckAge(donor.BornAt))
+            {
+                return ResultViewModel<int>.Error("Só é possível realizar doação maior de idade!");
+            }
+            else if (!donation.CheckQuantityMlDonation())
+            {
+                return ResultViewModel<int>.Error("Quantidade doada fora do limite!");
+            }
+
             if (donor is not null && donationByDonor is not null)
             {
-                if (!donationByDonor.CheckAge())
-                {
-                    return ResultViewModel<int>.Error("Só é possível realizar doação maior de idade!");
-                }
-                if (!donation.CheckQuantityMlDonation())
-                {
-                    return ResultViewModel<int>.Error("Quantidade doada fora do limite!");
-                }
                 if (donor.Gender == Core.Enum.Gender.Male && !donationByDonor.MenDonation())
                 {
                     return ResultViewModel<int>.Error("Só é possível realizar doações a cada 60 dias");

@@ -21,16 +21,16 @@
             DonorId = donorId;
         }
 
-        public bool CheckAge()
+        public bool CheckAge(DateTime bornAt)
         {
             var currentDate = DateTime.UtcNow;
-            var bornAt = Donor.BornAt;
-            var age = currentDate.Year - bornAt.Year;
+            var _bornAt = bornAt;
+            var age = currentDate.Year - _bornAt.Year;
 
             if (age > 18) return true;
             else if (age == 18)
             {
-                if (bornAt.Month < currentDate.Month)
+                if (_bornAt.Month < currentDate.Month)
                 {
                     return true;
                 }

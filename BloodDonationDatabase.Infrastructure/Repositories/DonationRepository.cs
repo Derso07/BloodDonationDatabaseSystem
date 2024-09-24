@@ -17,7 +17,7 @@ namespace BloodDonationDatabase.Infrastructure.Repositories
         public async Task<List<Donation?>> GetAll()
         {
             return await _context.Donations
-                .Where(d => d.IsDeleted)
+                .Where(d => !d.IsDeleted)
                 .ToListAsync();
         }
 
