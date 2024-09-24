@@ -3,6 +3,7 @@ using BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor;
 using BloodDonationDatabase.Application.Commands.DonorCommand.UpdateDonor;
 using BloodDonationDatabase.Application.Queries.DonorQueries.GetAllDonor;
 using BloodDonationDatabase.Application.Queries.DonorQueries.GetDonorById;
+using BloodDonationDatabase.Application.Queries.DonorQueries.GetDonorWithDonations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +35,18 @@ namespace BloodDonationDatabase.API.Controller
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _mediator.Send(new GetDonorByIdQuery(id));
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("DonorWithDonations/{id}")]
+        public async Task<IActionResult> GetByIdDonorWithDonations(int id)
+        {
+            var result = await _mediator.Send(new GetDonorDonationsQuery(id));
 
             if (!result.IsSuccess)
             {
