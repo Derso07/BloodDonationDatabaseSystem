@@ -26,6 +26,7 @@ namespace BloodDonationDatabase.Infrastructure.Repositories
             return await _context.Donations
                 .Where(d => d.DonorId == donorId &&
                 !d.IsDeleted)
+                .OrderBy(d => d.DonationAt)
                 .FirstOrDefaultAsync();
         }
 

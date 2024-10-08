@@ -1,4 +1,5 @@
 ﻿using BloodDonationDatabase.Application.Model;
+using BloodDonationDatabase.Application.Validators;
 using BloodDonationDatabase.Core.Repositories;
 using BloodDonationDatabase.Core.Repository;
 using MediatR;
@@ -21,31 +22,28 @@ namespace BloodDonationDatabase.Application.Commands.DonationCommand.InsertDonat
         private readonly IBloodStockRespository _bloodStockRespository;
         public async Task<ResultViewModel<int>> Handle(InsertDonationCommand request, CancellationToken cancellationToken)
         {
-            var donation = request.ToEntity();
-            var donor = await _donorRepository.GetById(donation.DonorId);
+            var donor = await _donorRepository.GetById(request.DonorId);
             var donationByDonor = await _donationRepository.GetByDonorId(donor.Id);
+            var model = new DonorDonationViewModel
+            {
+                Gender = donor.Gender,
+                BornAt = donor.BornAt,
+                DonationAt = donationByDonor.DonationAt
 
-            if (!donation.CheckAge(donor.BornAt))
-            {
-                return ResultViewModel<int>.Error("Só é possível realizar doação maior de idade!");
-            }
-            else if (!donation.CheckQuantityMlDonation())
-            {
-                return ResultViewModel<int>.Error("Quantidade doada fora do limite!");
-            }
+            };
+            request.Donor = model;
 
-            if (donor is not null && donationByDonor is not null)
+            var donorDonationValidator = new DonorDonationValidator();
+            var validationResult = await donorDonationValidator.ValidateAsync(request.Donor);
+
+            if (!validationResult.IsValid)
             {
-                if (donor.Gender == Core.Enum.Gender.Male && !donationByDonor.MenDonation())
-                {
-                    return ResultViewModel<int>.Error("Só é possível realizar doações a cada 60 dias");
-                }
-                if (donor.Gender == Core.Enum.Gender.Female && !donationByDonor.WomenDonation())
-                {
-                    return ResultViewModel<int>.Error("Só é possível realizar doações a cada 90 dias");
-                }
+                string allErrors = string.Join("; ", validationResult.Errors.Select(e => e.ErrorMessage));
+
+                return ResultViewModel<int>.Error(allErrors);
             }
 
+            var donation = request.ToEntity();
             await _donationRepository.Insert(donation);
             await _bloodStockRespository.UpdateByType(donor.BloodType, donor.RhFactor, donation.QuantityML);
 

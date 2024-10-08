@@ -1,4 +1,7 @@
 ﻿using BloodDonationDatabase.Application.Commands.BloodStockCommand.InsertBloodStock;
+using BloodDonationDatabase.Application.Commands.DonorCommand.InsertDonor;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BloodDonationDatabase.Application
@@ -8,7 +11,8 @@ namespace BloodDonationDatabase.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services
-                .AddHandlers();
+                .AddHandlers()
+                .AddValidation();
 
             return services;
         }
@@ -17,6 +21,15 @@ namespace BloodDonationDatabase.Application
         {
             services.AddMediatR(config =>
                 config.RegisterServicesFromAssemblyContaining<InsertBloodStockCommand>());
+
+            return services;
+        }
+
+        private static IServiceCollection AddValidation(this IServiceCollection services)
+        {
+            services
+                .AddFluentValidationAutoValidation()
+                .AddValidatorsFromAssemblyContaining<InsertDonorAdressCommand>();
 
             return services;
         }
