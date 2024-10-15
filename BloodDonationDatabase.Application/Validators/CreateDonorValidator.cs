@@ -14,6 +14,26 @@ namespace BloodDonationDatabase.Application.Validators
             RuleFor(d => d.FullName)
                 .NotEmpty()
                 .MaximumLength(50);
+
+            RuleFor(d => d.BornAt)
+                .NotEmpty();
+
+            RuleFor(d => d.Gender)
+                .NotEmpty();
+
+            RuleFor(d => d.Weight)
+                .Must(w => w >= 50)
+                .NotEmpty()
+                .WithMessage("O peso deve ser maior que 50 Kg");
+
+            RuleFor(d => d.BloodType)
+                .NotEmpty();
+
+            RuleFor(d => d.RhFactor)
+                .NotEmpty();
+
+            RuleFor(d => d.ZipCode)
+                .NotEmpty();
         }
     }
 }
