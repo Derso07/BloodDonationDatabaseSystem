@@ -8,7 +8,9 @@ namespace BloodDonationDatabase.Core.Repositories
         Task Insert(BloodStock bloodStock);
         Task UpdateByType(BloodType bloodType, RhFactor rhFactor, double quantityML);
         Task Update(BloodStock bloodStock);
+        Task WithdrawBlood(int id, double quantityRemoved);
         Task<BloodStock?> GetById(int id);
+        Task<BloodStock?> GetByType(BloodType? bloodType, RhFactor? rhFactor);
         Task<List<BloodStock?>> GetAll();
     }
 }

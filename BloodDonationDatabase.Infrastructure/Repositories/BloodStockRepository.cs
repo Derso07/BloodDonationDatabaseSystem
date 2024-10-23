@@ -61,5 +61,22 @@ namespace BloodDonationDatabase.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<BloodStock?> GetByType(BloodType? bloodType, RhFactor? rhFactor)
+        {
+            var bloodStock = await _context.BloodStocks
+                .Where(b => b.BloodType == bloodType && b.RhFactor == rhFactor)
+                .FirstOrDefaultAsync();
+
+            return bloodStock;
+        }
+
+        public async Task WithdrawBlood(int id, double quantityRemoved)
+        {
+            var bloodStock = await GetById(id);
+
+            bloodStock.RemoveQuantity(quantityRemoved);
+            await _context.SaveChangesAsync();
+        }
     }
 }

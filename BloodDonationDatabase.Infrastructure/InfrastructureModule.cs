@@ -1,6 +1,8 @@
 ﻿using BloodDonationDatabase.Core.Repositories;
 using BloodDonationDatabase.Core.Repository;
+using BloodDonationDatabase.Core.Services;
 using BloodDonationDatabase.Infrastructure.Context;
+using BloodDonationDatabase.Infrastructure.Email;
 using BloodDonationDatabase.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +14,9 @@ namespace BloodDonationDatabase.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddServices(configuration);
+            services
+                .AddServices(configuration)
+                .AddEmail();
 
             return services;
         }
@@ -29,6 +33,13 @@ namespace BloodDonationDatabase.Infrastructure
             services.AddScoped<IDonationRepository, DonationRepository>();
             services.AddScoped<IDonorRepository, DonorRepository>();
 
+            return services;
+        }
+
+        private static IServiceCollection AddEmail(this IServiceCollection services)
+        {
+            services.AddTransient<IEmailSenderService, EmailSender>();
+                
             return services;
         }
     }

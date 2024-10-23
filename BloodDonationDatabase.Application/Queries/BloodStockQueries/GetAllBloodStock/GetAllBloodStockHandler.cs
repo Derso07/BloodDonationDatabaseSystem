@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BloodDonationDatabase.Application.Queries.BloodStockQueries.GetAllBloodStock
 {
-    public class GetAllBloodStockHandler : IRequestHandler<GetAllBloodStockCommand, ResultViewModel<List<BloodStockViewModel>>>
+    public class GetAllBloodStockHandler : IRequestHandler<GetAllBloodStockQuery, ResultViewModel<List<BloodStockViewModel>>>
     {
         public GetAllBloodStockHandler(IBloodStockRespository respository)
         {
@@ -13,7 +13,7 @@ namespace BloodDonationDatabase.Application.Queries.BloodStockQueries.GetAllBloo
 
         private readonly IBloodStockRespository _respository;
 
-        public async Task<ResultViewModel<List<BloodStockViewModel>>> Handle(GetAllBloodStockCommand request, CancellationToken cancellationToken)
+        public async Task<ResultViewModel<List<BloodStockViewModel>>> Handle(GetAllBloodStockQuery request, CancellationToken cancellationToken)
         {
             var bloodStocks = await _respository.GetAll();
 

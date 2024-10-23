@@ -3,7 +3,7 @@ using MediatR;
 
 namespace BloodDonationDatabase.Application.Queries.BloodStockQueries.GetAllBloodStock
 {
-    public class GetAllBloodStockCommand : IRequest<ResultViewModel<List<BloodStockViewModel>>>
+    public class GetAllBloodStockQuery : IRequest<ResultViewModel<List<BloodStockViewModel>>>
     {
     }
 }

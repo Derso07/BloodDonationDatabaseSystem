@@ -14,6 +14,7 @@ namespace BloodDonationDatabase.Core.Entities
         public BloodType BloodType { get; private set; }
         public RhFactor RhFactor { get; private set; }
         public double QuantityML { get; private set; }
+        public double MinimumQuantity { get; private set; }
 
         public void Update(BloodType bloodType, RhFactor rhFactor, double quantityML)
         {
@@ -27,5 +28,20 @@ namespace BloodDonationDatabase.Core.Entities
             QuantityML += quantityMl;
         }
 
+        public bool RemoveQuantity(double quantityRemoved)
+        {
+            if (quantityRemoved > QuantityML || quantityRemoved >= 0)
+            {
+                return false;
+            }
+            QuantityML -= quantityRemoved;
+
+            return true;
+        }
+
+        public bool ReachedTheMinimum()
+        {
+            return MinimumQuantity < QuantityML;
+        }
     }
 }

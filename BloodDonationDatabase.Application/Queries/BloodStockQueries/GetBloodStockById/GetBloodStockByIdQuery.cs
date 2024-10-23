@@ -3,9 +3,9 @@ using MediatR;
 
 namespace BloodDonationDatabase.Application.Queries.BloodStockQueries.GetBloodStockById
 {
-    public class GetBloodStockByIdCommand : IRequest<ResultViewModel<BloodStockViewModel>>
+    public class GetBloodStockByIdQuery : IRequest<ResultViewModel<BloodStockViewModel>>
     {
-        public GetBloodStockByIdCommand(int id)
+        public GetBloodStockByIdQuery(int id)
         {
             Id = id;
         }

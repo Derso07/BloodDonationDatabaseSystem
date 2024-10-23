@@ -1,8 +1,12 @@
 ﻿using BloodDonationDatabase.Application.Commands.BloodStockCommand.DeleteBloodStock;
 using BloodDonationDatabase.Application.Commands.BloodStockCommand.InsertBloodStock;
 using BloodDonationDatabase.Application.Commands.BloodStockCommand.UpdateBloodStock;
+using BloodDonationDatabase.Application.Commands.BloodStockCommand.UpdateQuantityBloodStock;
+using BloodDonationDatabase.Application.Notification;
 using BloodDonationDatabase.Application.Queries.BloodStockQueries.GetAllBloodStock;
 using BloodDonationDatabase.Application.Queries.BloodStockQueries.GetBloodStockById;
+using BloodDonationDatabase.Application.Queries.BloodStockQueries.GetBloodStockByType;
+using BloodDonationDatabase.Core.Enum;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,15 +25,26 @@ namespace BloodDonationDatabase.API.Controller
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _mediator.Send(new GetAllBloodStockCommand());
+            var result = await _mediator.Send(new GetAllBloodStockQuery());
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var result = await _mediator.Send(new GetBloodStockByIdCommand(id));
+            var result = await _mediator.Send(new GetBloodStockByIdQuery(id));
             if(!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("{bloodType}/{rhFactor}")]
+        public async Task<IActionResult> GetByType(int bloodType, int rhFactor)
+        {
+            var result = await _mediator.Send(new GetBloodStockByTypeQuery((BloodType)bloodType, (RhFactor)rhFactor));
+            if (!result.IsSuccess)
             {
                 return BadRequest(result.Message);
             }
@@ -52,6 +67,22 @@ namespace BloodDonationDatabase.API.Controller
             {
                 return BadRequest(result.Message);
             }
+            return Ok(result);
+        }
+        [HttpPut("{id}/withdraw")]
+        public async Task<IActionResult> WithdrawBlood(int id, UpdateQuantityBloodStockCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+            await _mediator.Publish(new OutOfStockNotification
+            {
+               Id = id,
+            });
+
             return Ok(result);
         }
 
