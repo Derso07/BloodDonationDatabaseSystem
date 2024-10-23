@@ -23,5 +23,7 @@ Aplicando conceitos adquiridos na plataforma [Next Wave Education](https://nextw
 
 # Contato
 Nome: [Ederson Henrique](https://github.com/Derso07)
+
 LinkedIn: [Ederson Henrique](www.linkedin.com/in/ederson-henrique-santos)
-E-mail: [edersonhenrique2016@gmail.com]
+
+E-mail: edersonhenrique2016@gmail.com
