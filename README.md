@@ -24,6 +24,6 @@ Aplicando conceitos adquiridos na plataforma [Next Wave Education](https://nextw
 # Contato
 Nome: Ederson Henrique
 
-LinkedIn: * [Ederson Henrique](www.linkedin.com/in/ederson-henrique-santos)
+LinkedIn: [Ederson Henrique](http://www.linkedin.com/in/ederson-henrique-santos)
 
 E-mail: edersonhenrique2016@gmail.com
