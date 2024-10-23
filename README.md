@@ -11,7 +11,7 @@ Aplicando conceitos adquiridos na plataforma [Next Wave Education](https://nextw
 * [FluentValidation](https://fluentvalidation.net/)
 * [SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-2022)
 * [Swagger](https://swagger.io/)
-* [Injeção de Dependências](https://learn.microsoft.com/pt-br/dotnet/core/extensions/dependency-injection))
+* [Injeção de Dependências](https://learn.microsoft.com/pt-br/dotnet/core/extensions/dependency-injection)
 
 # Funcionalidades
 
@@ -22,7 +22,7 @@ Aplicando conceitos adquiridos na plataforma [Next Wave Education](https://nextw
 - Alerta de Estoque Baixo: Envia notificações por e-mail quando o estoque de sangue atinge níveis críticos.
 
 # Contato
-Nome: [Ederson Henrique](https://github.com/Derso07)
+Nome: Ederson Henrique
 
 LinkedIn: [Ederson Henrique](www.linkedin.com/in/ederson-henrique-santos)
 
