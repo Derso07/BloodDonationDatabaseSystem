@@ -9,8 +9,8 @@ Aplicando conceitos adquiridos na plataforma [Next Wave Education](https://nextw
 * [Entity Framework Core 8](https://docs.microsoft.com/en-us/ef/core/)
 * [MediatR](https://github.com/jbogard/MediatR)
 * [FluentValidation](https://fluentvalidation.net/)
-* [SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-2022))
-* [Swagger](https://swagger.io/))
+* [SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-2022)
+* [Swagger](https://swagger.io/)
 * [Injeção de Dependências](https://learn.microsoft.com/pt-br/dotnet/core/extensions/dependency-injection))
 
 # Funcionalidades
