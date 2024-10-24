@@ -71,12 +71,14 @@ namespace BloodDonationDatabase.Infrastructure.Repositories
             return bloodStock;
         }
 
-        public async Task WithdrawBlood(int id, double quantityRemoved)
+        public async Task<bool> WithdrawBlood(int id, double quantityRemoved)
         {
             var bloodStock = await GetById(id);
 
-            bloodStock.RemoveQuantity(quantityRemoved);
+            var result = bloodStock.RemoveQuantity(quantityRemoved);
             await _context.SaveChangesAsync();
+
+            return result;
         }
     }
 }

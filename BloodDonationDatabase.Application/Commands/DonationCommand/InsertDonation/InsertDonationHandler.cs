@@ -24,11 +24,12 @@ namespace BloodDonationDatabase.Application.Commands.DonationCommand.InsertDonat
         {
             var donor = await _donorRepository.GetById(request.DonorId);
             var donationByDonor = await _donationRepository.GetByDonorId(donor.Id);
+
             var model = new DonorDonationViewModel
             {
                 Gender = donor.Gender,
                 BornAt = donor.BornAt,
-                DonationAt = donationByDonor.DonationAt
+                DonationAt = donationByDonor == null ? request.DonationAt : donationByDonor.DonationAt
 
             };
             request.Donor = model;

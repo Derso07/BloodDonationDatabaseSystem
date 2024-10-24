@@ -4,6 +4,14 @@ namespace BloodDonationDatabase.Core.Entities
 {
     public class BloodStock : BaseEntity
     {
+        public BloodStock(BloodType bloodType, RhFactor rhFactor, double quantityML, double minimumQuantity)
+        {
+            BloodType = bloodType;
+            RhFactor = rhFactor;
+            QuantityML = quantityML;
+            MinimumQuantity = minimumQuantity;
+        }
+
         public BloodStock(BloodType bloodType, RhFactor rhFactor, double quantityML)
         {
             BloodType = bloodType;
@@ -30,7 +38,7 @@ namespace BloodDonationDatabase.Core.Entities
 
         public bool RemoveQuantity(double quantityRemoved)
         {
-            if (quantityRemoved > QuantityML || quantityRemoved >= 0)
+            if (quantityRemoved > QuantityML || quantityRemoved <= 0)
             {
                 return false;
             }
@@ -41,7 +49,7 @@ namespace BloodDonationDatabase.Core.Entities
 
         public bool ReachedTheMinimum()
         {
-            return MinimumQuantity < QuantityML;
+            return MinimumQuantity > QuantityML;
         }
     }
 }

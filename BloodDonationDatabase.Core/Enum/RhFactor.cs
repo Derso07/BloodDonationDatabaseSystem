@@ -2,7 +2,7 @@
 {
     public enum RhFactor
     {
-        Positive,
-        Negative
+        Positive=1,
+        Negative=2
     }
 }

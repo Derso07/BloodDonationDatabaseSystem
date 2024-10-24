@@ -10,8 +10,9 @@ namespace BloodDonationDatabase.Application.Commands.BloodStockCommand.InsertBlo
         public BloodType BloodType { get; set; }
         public RhFactor RhFactor { get; set; }
         public double QuantityML { get; set; }
+        public double MinimumQuantity { get; set; }
 
         public BloodStock ToEntity()
-            => new(BloodType, RhFactor, QuantityML);
+            => new(BloodType, RhFactor, QuantityML, MinimumQuantity);
     }
 }

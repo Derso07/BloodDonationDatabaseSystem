@@ -19,6 +19,7 @@ namespace BloodDonationDatabase.Application.Validators
                 .NotEmpty();
 
             RuleFor(d => d.Gender)
+                .IsInEnum()
                 .NotEmpty();
 
             RuleFor(d => d.Weight)
@@ -27,9 +28,11 @@ namespace BloodDonationDatabase.Application.Validators
                 .WithMessage("O peso deve ser maior que 50 Kg");
 
             RuleFor(d => d.BloodType)
+                .IsInEnum()
                 .NotEmpty();
 
             RuleFor(d => d.RhFactor)
+                .IsInEnum()
                 .NotEmpty();
 
             RuleFor(d => d.ZipCode)

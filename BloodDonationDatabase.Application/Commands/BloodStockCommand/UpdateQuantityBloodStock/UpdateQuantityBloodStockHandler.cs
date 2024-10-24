@@ -16,12 +16,14 @@ namespace BloodDonationDatabase.Application.Commands.BloodStockCommand.UpdateQua
         public async Task<ResultViewModel> Handle(UpdateQuantityBloodStockCommand request, CancellationToken cancellationToken)
         {
             var bloodStock = await _respository.GetById(request.Id);
+            
             if (bloodStock is null) 
             {
                 return ResultViewModel.Error("Não há estoque com esse Id!");
             }
+            var result = await _respository.WithdrawBlood(request.Id, request.RemoveQuantity);
 
-            if (bloodStock.RemoveQuantity(request.RemoveQuantity))
+            if (result)
             {
                 return ResultViewModel.Success();
             }
